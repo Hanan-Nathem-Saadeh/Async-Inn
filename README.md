@@ -6,7 +6,7 @@
 
 ***Hotel Asset Management system***
 
-![](./img/Async-Inn-Hottel.drawio.png)
+![](./img/Async-Inn-Hottel.drawio.png.png)
 
 
 Hotel Table :
