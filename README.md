@@ -6,7 +6,24 @@
 
 ***Hotel Asset Management system***
 
+![](./img/async-inn-erd.png)
+
+---
+![](./img/Hotels.png)
+
+---
+![](./img/Rooms.png)
+
+---
+
+![](./img/Amentities.png)
+
+
+
+
 ![](./img/Async-Inn-Hottel.drawio.png.png)
+
+
 
 
 Hotel Table :
