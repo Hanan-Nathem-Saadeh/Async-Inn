@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Async_Inn_Management_System.Models
 {
@@ -8,6 +9,8 @@ namespace Async_Inn_Management_System.Models
 
         public int ID  { get; set; }
         
-        public string Amenity_Name { get; set; } 
+        public string Amenity_Name { get; set; }
+
+        public List<RoomAmenities> RoomAmenity { get; set; }
     }
 }

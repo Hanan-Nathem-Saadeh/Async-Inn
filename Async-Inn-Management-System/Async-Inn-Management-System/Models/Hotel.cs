@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Async_Inn_Management_System.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Async_Inn_Management_System.HotelModels
 {
@@ -17,6 +19,7 @@ namespace Async_Inn_Management_System.HotelModels
       
         public string Hotel_Country { get; set; }
        
-        public string Hotel_Phone { get; set; } 
+        public string Hotel_Phone { get; set; }
+        public List<HotelRoom> HotelRoom { get; set; }
     }
 }
