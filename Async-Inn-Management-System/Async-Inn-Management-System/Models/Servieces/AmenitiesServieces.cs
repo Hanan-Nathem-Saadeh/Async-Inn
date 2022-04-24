@@ -1,9 +1,11 @@
-﻿using Async_Inn_Management_System.Data;
+﻿
+using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 namespace Async_Inn_Management_System.Models.Servieces
 {
     public class AmenitiesServieces : IAmentities
@@ -35,15 +37,17 @@ namespace Async_Inn_Management_System.Models.Servieces
 
         public async Task<List<Amenity>> GetAmenities()
         {
-            var amenity = await _context.Amenities.ToListAsync();
-            return amenity;
+            return await _context.Amenities.Include(x => x.RoomAmenity)
+                                           .ThenInclude(x => x.Room)
+                                           .ToListAsync();
         }
 
         public async Task<Amenity> GetAmenity(int id)
         {
-            Amenity amenity = await _context.Amenities.FindAsync(id);
 
-            return amenity;
+            return await _context.Amenities.Include(x => x.RoomAmenity)
+                                           .ThenInclude(x => x.Room)
+                                           .FirstOrDefaultAsync(x => x.ID == id);
         }
 
         public async Task<Amenity> UpdateAmenity(int id, Amenity amenity)

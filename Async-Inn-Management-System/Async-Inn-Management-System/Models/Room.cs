@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Async_Inn_Management_System.Models
 {
@@ -10,7 +11,9 @@ namespace Async_Inn_Management_System.Models
         
         public string Room_Name { get; set; }
       
-        public int Room_Layout { get; set; }        
+        public int Room_Layout { get; set; }
+        public List<RoomAmenities> RoomAmenity { get; set; }
+        public List<HotelRoom> HotelRoom { get; set; }
 
     }
 }

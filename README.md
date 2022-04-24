@@ -62,3 +62,67 @@ Relation : one to many with amintities table.
 
 AmantityRoomTable :
 field : amantity id,roomid.compossite id 
+
+## 24/4/2022
+# Endpoints:(Routing)
+
+- Routs for Hoteles
+
+```
+GET: api/Hotels => To Get a list of all hotels.
+GET: api/Hotels/{id} =>  Get a hotel by ID.
+PUT: api/Hotels/{id} =>  Update a hotel by ID.
+POST: api/Hotels => Create a new hotel.
+DELETE: api/Hotels/{id} => Delete a hotel bu ID.
+```
+
+--- 
+
+- Routs for Rooms 
+
+```
+GET: api/Rooms =>  Get a list of all rooms.
+GET: api/Rooms/{id} => Get a room by ID.
+PUT: api/Rooms/{id} => Update a room by ID.
+POST: api/Rooms => Create a new room.
+POST: {roomId}/Amenity/{amenityId} => Add an amenity to a room.
+DELETE: {roomId}/{amenityId} => Delete an amenity from a room.
+DELETE: {roomId} => Delete a room.
+```
+
+---
+
+- Routs for Amentities
+
+```
+GET: api/Amenities => Get a list of all amenities
+GET: api/Amenities/{id} => Get an amenity by ID
+PUT: api/Amenities/{id} => Update an amenity by ID
+POST: api/Amenities => Create a new amenity
+DELETE: api/Amenities/{id} => Delete an amenity by ID
+```
+
+---
+
+- Routs for HotelRoom
+
+```
+GET: api/HotelRooms => Get a list of all hotelRooms
+GET: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Get a hotelRooms by ID
+PUT: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Update a hotelRooms by ID
+POST: api/HotelRooms/"{hotelId}/Rooms => Create a new hotelRooms
+DELETE: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Delete a hotelRooms
+
+```
+
+---
+
+
+
+
+
+
+
+
+
+

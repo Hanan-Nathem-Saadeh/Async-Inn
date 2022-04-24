@@ -75,5 +75,21 @@ namespace Async_Inn_Management_System.Controllers
         //{
         //    return _context.Rooms.Any(e => e.ID == id);
         //}
+        // Delete Amentity
+        //api/Rooms/5/1
+        [HttpDelete("{roomId}/{amenityId}")]
+        public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
+        {
+            await _Room.RemoveAmentityFromRoom(roomId, amenityId);
+            return NoContent();
+        }
+        //Add Amentity to room
+        //api/Rooms/3/2
+        [HttpPost("{roomId}/{amenityId}")]
+        public async Task<IActionResult> aAddAmantityToRoom(int roomId, int amenityId)
+        {
+            await _Room.AddAmenityToRoom(roomId, amenityId);
+            return NoContent();
+        }
     }
 }
