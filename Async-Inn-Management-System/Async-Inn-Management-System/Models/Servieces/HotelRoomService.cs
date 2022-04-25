@@ -14,7 +14,7 @@ namespace Async_Inn_Management_System.Models.Servieces
         {
             _context = context;
         }
-        public async Task<HotelRoom> Create(HotelRoom hotelRoom)
+        public async Task<HotelRoom> Create(int HotelID, HotelRoom hotelRoom)
         {
             _context.Entry(hotelRoom).State = EntityState.Added;
             await _context.SaveChangesAsync();

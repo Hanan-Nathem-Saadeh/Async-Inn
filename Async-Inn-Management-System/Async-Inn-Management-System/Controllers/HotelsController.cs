@@ -75,9 +75,6 @@ namespace Async_Inn_Management_System.Controllers
             return NoContent();
         }
 
-        //private bool HotelExists(int id)
-        //{
-        //    return _context.Hotels.Any(e => e.ID == id);
-        //}
+      
     }
 }

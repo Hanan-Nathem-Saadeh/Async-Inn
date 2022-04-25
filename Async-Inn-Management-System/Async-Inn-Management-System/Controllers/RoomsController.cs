@@ -71,10 +71,7 @@ namespace Async_Inn_Management_System.Controllers
             return NoContent();
         }
 
-        //private bool RoomExists(int id)
-        //{
-        //    return _context.Rooms.Any(e => e.ID == id);
-        //}
+        
         // Delete Amentity
         //api/Rooms/5/1
         [HttpDelete("{roomId}/{amenityId}")]
