@@ -1,10 +1,13 @@
 # Async-Inn
+# Hotel Asset Management system
+---
 
 ## Hanan Nathem Jalal Saadeh
 
+# Lab 11 + 12
 ## 14/4/2022
 
-# Hotel Asset Management system
+
 # Description
 
 This is a ASP.NET Core MVC web application that will allow Async Hotel to better manage the assets in their hotels. This application can modify and manage rooms, amenities, and new hotel locations. The data entered by the user will persist across a relational database and maintain its integrity as changes are made to the system.
@@ -15,32 +18,9 @@ This is a ASP.NET Core MVC web application that will allow Async Hotel to better
 - Ability to get data from hotels table and Update or delete from the table.
 - the same for rooms and amenities tables.
 
-# Getting Started
-Clone this repository to your local machine.
+ ![](./img/Async-Inn-Hottel.drawio.png)
 
-$ git clone https://github.com/Hanan-Nathem-Saadeh/Async-Inn.git
-
-![](./img/async-inn-erd.png)
-
----
-![](./img/Hotels.png)
-
----
-![](./img/Rooms.png)
-
----
-
-![](./img/Amentities.png)
-
-
-
-
-![](./img/Async-Inn-Hottel.drawio.png.png)
-
-
-
-
-Hotel Table :
+ Hotel Table :
  Fields: ID, Name, city, state, address, and finally the phone number.
 Relation: One to many relation with Rooms Table.
 
@@ -63,7 +43,55 @@ Relation : one to many with amintities table.
 AmantityRoomTable :
 field : amantity id,roomid.compossite id 
 
+
+# Getting Started
+Clone this repository to your local machine.
+
+$ git clone https://github.com/Hanan-Nathem-Saadeh/Async-Inn.git
+
+
+# Lab 13
+
+We took about Refactor our Controllers using Dependency Injection and a Repository:
+
+- Build a Model Interface.
+- Build a basic service.:
+Created a service for each of the controllers that implement the appropriate interface.
+- Database Logic: Create/Get All/Get One/Delete/Update
+- Refactor the Controller: Constructor.
+- CRUD Methods.
+- Run the app.
+
+**Confirmed in POSTMAN**
+
+![](./img/async-inn-erd.png)
+
+---
+![](./img/Hotels.png)
+
+---
+![](./img/Rooms.png)
+
+---
+
+![](./img/Amentities.png)
+
+
+# Lab 14
 ## 24/4/2022
+in this lab we took about Navigation Properties & Routing
+and learnd about how build the join table between tables with many to many relations
+
+- create HotelRoom class in models.
+- Navigation property .
+- connect Hotel class and Room class with HotelRoom class by adding
+public List<HotelRoom> HotelRooms { get; set; } to both classes
+- change tha data set.
+- create forign key to the join table.
+- create interface with CRUD Methods.
+- Creat the Service inherit the interface.
+- Add to your IRoom Interface the method signatures to => AddAmenityToRoom and RemoveAmentityFromRoom
+
 # Endpoints:(Routing)
 
 - Routs for Hoteles
@@ -85,7 +113,7 @@ GET: api/Rooms =>  Get a list of all rooms.
 GET: api/Rooms/{id} => Get a room by ID.
 PUT: api/Rooms/{id} => Update a room by ID.
 POST: api/Rooms => Create a new room.
-POST: {roomId}/Amenity/{amenityId} => Add an amenity to a room.
+POST: {roomId}/{amenityId} => Add an amenity to a room.
 DELETE: {roomId}/{amenityId} => Delete an amenity from a room.
 DELETE: {roomId} => Delete a room.
 ```
@@ -107,22 +135,10 @@ DELETE: api/Amenities/{id} => Delete an amenity by ID
 - Routs for HotelRoom
 
 ```
-GET: api/HotelRooms => Get a list of all hotelRooms
+GET: api/HotelRooms/{hotelId}/Rooms => Get a list of all hotelRooms
 GET: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Get a hotelRooms by ID
-PUT: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Update a hotelRooms by ID
+PUT:  api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Update a hotelRooms by ID
 POST: api/HotelRooms/"{hotelId}/Rooms => Create a new hotelRooms
 DELETE: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Delete a hotelRooms
 
 ```
-
----
-
-
-
-
-
-
-
-
-
-

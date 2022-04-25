@@ -4,8 +4,8 @@
     {
         public int RoomId { get; set; }
         public int AmentityId { get; set; }
-        public Amenity Amenity = new Amenity ();
-        public Room Room = new Room ();
+        public Amenity Amenity { get; set; }
+        public Room Room { get; set; }
 
 
     }

@@ -29,7 +29,7 @@ namespace Async_Inn_Management_System.Models.Servieces
         }
         public async Task RemoveAmentityFromRoom(int roomId, int amenityId)
         {
-            var removeAmentity = _context.RoomAmenities.FirstOrDefaultAsync(x => x.RoomId == roomId && x.AmentityId == amenityId);
+            var removeAmentity = await _context.RoomAmenities.FirstOrDefaultAsync(x => x.RoomId == roomId && x.AmentityId == amenityId);
             _context.Entry(removeAmentity).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
