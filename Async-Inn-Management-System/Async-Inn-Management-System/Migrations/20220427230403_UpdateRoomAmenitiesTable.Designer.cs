@@ -4,14 +4,16 @@ using Async_Inn_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Async_Inn_Management_System.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    partial class AsyncInnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220427230403_UpdateRoomAmenitiesTable")]
+    partial class UpdateRoomAmenitiesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,8 +148,8 @@ namespace Async_Inn_Management_System.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Room_Layout")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Room_Layout")
+                        .HasColumnType("int");
 
                     b.Property<string>("Room_Name")
                         .HasColumnType("nvarchar(max)");
@@ -160,19 +162,19 @@ namespace Async_Inn_Management_System.Migrations
                         new
                         {
                             ID = 1,
-                            Room_Layout = "One Bedroom",
+                            Room_Layout = 2,
                             Room_Name = "Seahawks Snooze"
                         },
                         new
                         {
                             ID = 2,
-                            Room_Layout = "Two Bedroom",
+                            Room_Layout = 1,
                             Room_Name = "Restful Rainier"
                         },
                         new
                         {
                             ID = 3,
-                            Room_Layout = "Stodio",
+                            Room_Layout = 0,
                             Room_Name = "classic Snooze"
                         });
                 });

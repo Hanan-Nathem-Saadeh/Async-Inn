@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
+using Async_Inn_Management_System.Models.DTO;
+using static Async_Inn_Management_System.Models.DTO.RoomDTO;
 
 namespace Async_Inn_Management_System.Controllers
 {
@@ -24,7 +26,7 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             var room = await _Room.GetRooms();
             return Ok(room);
@@ -32,33 +34,31 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
-            Room room = await _Room.GetRoom(id);
+            RoomDTO room = await _Room.GetRoom(id);
             return Ok(room);
         }
 
         // PUT: api/Rooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
+        public async Task<IActionResult> PutRoom(int id, RoomDTO newroomDTO)
         {
-            if (id != room.ID)
+            if (id != newroomDTO.ID)
             {
                 return BadRequest();
             }
-
-            var modifiedRoom = await _Room.UpdateRoom(id, room);
-
-            return Ok(modifiedRoom);
+            var updateRoom = await _Room.UpdateRoom(id, newroomDTO);
+            return Ok(updateRoom);
         }
 
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<RoomDTO>> PostRoom(NewRoomDTO newRoomDTO)
         {
-            Room newRoom = await _Room.Create(room);
+            RoomDTO newRoom = await _Room.Create(newRoomDTO);
             return Ok(newRoom);
         }
 
@@ -83,7 +83,7 @@ namespace Async_Inn_Management_System.Controllers
         //Add Amentity to room
         //api/Rooms/3/2
         [HttpPost("{roomId}/{amenityId}")]
-        public async Task<IActionResult> aAddAmantityToRoom(int roomId, int amenityId)
+        public async Task<IActionResult> AddAmantityToRoom(int roomId, int amenityId)
         {
             await _Room.AddAmenityToRoom(roomId, amenityId);
             return NoContent();

@@ -142,3 +142,55 @@ POST: api/HotelRooms/"{hotelId}/Rooms => Create a new hotelRooms
 DELETE: api/HotelRooms/{hotelId}/Rooms/{roomNumber} => Delete a hotelRooms
 
 ```
+# Lab 16
+## 28/4/2022
+
+- Data Transfer Objects (DTOs)
+Add onto My current Async Inn application by cleaning up input and outputs of your controllers to be DTOs.
+
+- modify the controllers/Interfaces and The Servicies
+- Mu DTOs
+
+```
+
+Create DTOs that will be accepted and returned to the user:
+
+    public class HotelDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string StreetAddress { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Phone { get; set; }
+        public List<HotelRoomDTO> Rooms { get; set; }
+    }
+
+
+    public class HotelRoomDTO
+    {
+        public int HotelID { get; set; }
+        public int RoomNumber { get; set; }
+        public decimal Rate { get; set; }
+        public bool PetFriendly { get; set; }
+        public int RoomID { get; set; }
+        public RoomDTO Room { get; set; }
+    }
+
+    public class RoomDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Layout { get; set; }
+        public List<AmenityDTO> Amenities { get; set; }
+    }
+
+    public class AmenityDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+
+```
+
+
