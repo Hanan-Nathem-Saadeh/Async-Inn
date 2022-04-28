@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
+using Async_Inn_Management_System.Models.DTO;
 
 namespace Async_Inn_Management_System.Controllers
 {
@@ -25,14 +26,14 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/HotelRooms
         [HttpGet("{hotelId}/Rooms")]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRoom()
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRoom()
         {
             return Ok(await _hotelRoom.GetHotelRooms());
         }
 
         // GET: api/HotelRooms/5
         [HttpGet("{hotelId}/Rooms/{roomNumber}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelID, int roomNumber)
+        public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int hotelID, int roomNumber)
         {
             var hotelRoom = await _hotelRoom.GetHotelRoom(hotelID, roomNumber);
             if (hotelRoom == null)
@@ -45,7 +46,7 @@ namespace Async_Inn_Management_System.Controllers
         // PUT: api/HotelRooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{hotelId}/Rooms/{roomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(int hotelID, int roomNumber, HotelRoom hotelRoom)
+        public async Task<IActionResult> PutHotelRoom(int hotelID, int roomNumber, HotelRoomDTO hotelRoom)
         {
             if (hotelID != hotelRoom.HotelID && roomNumber != hotelRoom.RoomNumber)
             {
@@ -58,13 +59,12 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/HotelRooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("{hotelId}/Rooms")]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelID, HotelRoom hotelRoom)
+        public async Task<ActionResult<HotelRoomDTO>> PostHotelRoom(int Hotelid, HotelRoomDTO hotelRoom)
         {
-            HotelRoom newHotelRoom = await _hotelRoom.Create(hotelID, hotelRoom);
+            var newHotelRoom = await _hotelRoom.Create(Hotelid,hotelRoom);
 
             return Ok(newHotelRoom);
         }
-   
 
         // DELETE: api/HotelRooms/5
         [HttpDelete("{hotelId}/Rooms/{roomNumber}")]

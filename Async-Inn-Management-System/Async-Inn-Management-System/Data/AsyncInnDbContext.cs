@@ -25,9 +25,9 @@ namespace Async_Inn_Management_System.Data
                 new Hotel { ID = 3, Hotel_Name = "Mohammad Hotel", Hotel_Street_Address = "Three Street", Hotel_City = "Jarash", Hotel_State = "Jarash", Hotel_Country = "Jordan", Hotel_Phone = "0778900000" }
                 );
             modelBuilder.Entity<Room>().HasData(
-                new Room { ID = 1, Room_Name = "Seahawks Snooze",Room_Layout=2 },
-                new Room { ID = 2, Room_Name = "Restful Rainier" , Room_Layout =1},
-                new Room { ID = 3, Room_Name = "classic Snooze" , Room_Layout=0 }
+                new Room { ID = 1, Room_Name = "Seahawks Snooze",Room_Layout="One Bedroom" },
+                new Room { ID = 2, Room_Name = "Restful Rainier" , Room_Layout ="Two Bedroom"},
+                new Room { ID = 3, Room_Name = "classic Snooze" , Room_Layout="Stodio" }
                 );
             modelBuilder.Entity<Amenity>().HasData(
                 new Amenity { ID = 1, Amenity_Name = "Mini bar" },
@@ -35,7 +35,7 @@ namespace Async_Inn_Management_System.Data
                 new Amenity { ID = 3, Amenity_Name = "coffee maker" }
                 );
             modelBuilder.Entity<RoomAmenities>().HasKey(
-              RoomAmenities => new { RoomAmenities.RoomId , RoomAmenities.AmentityId}
+              RoomAmenities => new { RoomAmenities.RoomId , RoomAmenities.AmenitiesId}
                );
             modelBuilder.Entity<HotelRoom>().HasKey(
            HotelRoom => new { HotelRoom.RoomNumber, HotelRoom.HotelID }
