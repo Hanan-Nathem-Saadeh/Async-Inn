@@ -53,9 +53,10 @@ namespace Async_Inn_Management_System.Controllers
                 return BadRequest();
             }
 
-            var updateHotelRoom = await _hotelRoom.UpdateHotelRoom(hotelID, roomNumber, hotelRoom);
+            var updateHotelRoom = await _hotelRoom.Update(hotelID, roomNumber, hotelRoom);
             return Ok(updateHotelRoom);
         }
+    
         // POST: api/HotelRooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("{hotelId}/Rooms")]

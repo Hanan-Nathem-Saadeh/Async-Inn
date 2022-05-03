@@ -44,7 +44,7 @@ namespace Async_Inn_Management_System.Controllers
         // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, HotelDTO hotel)
+        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
         {
 
 
@@ -61,9 +61,9 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/Hotels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<HotelDTO>> PostHotel(HotelDTO hotel)
+        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-            var newHotel = await _Hotel.Create(hotel);
+            Hotel newHotel = await _Hotel.Create(hotel);
             return Ok(newHotel);
         }
 

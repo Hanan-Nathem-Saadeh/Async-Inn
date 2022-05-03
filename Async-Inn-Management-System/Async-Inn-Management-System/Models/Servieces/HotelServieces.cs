@@ -18,20 +18,12 @@ namespace Async_Inn_Management_System.Models.Servieces
             _context = context;
         }
 
-        public async Task<HotelDTO> Create(HotelDTO newHotelDTO)
+        public async Task<Hotel> Create(Hotel hotel)
         {
-            Hotel newHotel = new Hotel
-            {
-                ID = newHotelDTO.ID,
-                Hotel_Name = newHotelDTO.Name,
-                Hotel_Street_Address = newHotelDTO.StreetAddress,
-                Hotel_City = newHotelDTO.City,
-                Hotel_State = newHotelDTO.State,
-                Hotel_Phone = newHotelDTO.Phone
-            };
-            _context.Entry(newHotel).State = EntityState.Added;
+            _context.Entry(hotel).State = EntityState.Added;
+
             await _context.SaveChangesAsync();
-            return newHotelDTO;
+            return hotel;
         }
 
 
@@ -63,19 +55,24 @@ namespace Async_Inn_Management_System.Models.Servieces
                     Rate = x.Rate,
                     PetFriendly = x.PetFriendly,
                     RoomID = x.RoomID,
-                    Room = x.Room.HotelRoom.Select(x => new RoomDTO
+                    Room = new RoomDTO
                     {
                         ID = x.Room.ID,
                         Name = x.Room.Room_Name,
                         Layout = x.Room.Room_Layout,
+
                         Amenities = x.Room.RoomAmenity.Select(x => new AmenityDTO
                         {
-                            ID = x.Amenity.ID,
+                            ID = x.AmenityId,
                             Name = x.Amenity.Amenity_Name
                         }).ToList()
-                    }).FirstOrDefault()
-                }).ToList()
-            }).FirstOrDefaultAsync(x => x.ID == id);
+                    }
+                    }).ToList()
+           
+
+                 
+                    }).FirstOrDefaultAsync(x => x.ID == id);
+        
         }
 
 
@@ -96,36 +93,33 @@ namespace Async_Inn_Management_System.Models.Servieces
                     Rate = x.Rate,
                     PetFriendly = x.PetFriendly,
                     RoomID = x.RoomID,
-                    Room = x.Room.HotelRoom.Select(x => new RoomDTO
+                    Room = new RoomDTO
                     {
                         ID = x.Room.ID,
                         Name = x.Room.Room_Name,
                         Layout = x.Room.Room_Layout,
+
                         Amenities = x.Room.RoomAmenity.Select(x => new AmenityDTO
                         {
-                            ID = x.Amenity.ID,
+                            ID = x.AmenityId,
                             Name = x.Amenity.Amenity_Name
                         }).ToList()
-                    }).FirstOrDefault()
+                    }
                 }).ToList()
+
+
+
             }).ToListAsync();
         }
 
 
-        public async Task<HotelDTO> UpdateHotel(int id, HotelDTO newHotelDTO)
+        public async Task<Hotel> UpdateHotel(int id, Hotel hotel)
         {
-            Hotel updateHotel = new Hotel
-            {
-                ID = newHotelDTO.ID,
-                Hotel_Name = newHotelDTO.Name,
-                Hotel_Street_Address = newHotelDTO.StreetAddress,
-                Hotel_City = newHotelDTO.City,
-                Hotel_State = newHotelDTO.State,
-                Hotel_Phone = newHotelDTO.Phone
-            };
-            _context.Entry(updateHotel).State = EntityState.Modified;
+            _context.Entry(hotel).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
-            return newHotelDTO;
+
+            return hotel;
         }
 
     }

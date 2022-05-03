@@ -25,19 +25,19 @@ namespace Async_Inn_Management_System.Models.Servieces
             RoomAmenities roomAmenity = new RoomAmenities()
             {
                 RoomId = roomId,
-                AmenitiesId = amenityId
+                AmenityId = amenityId
             };
             _context.Entry(roomAmenity).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
         public async Task RemoveAmentityFromRoom(int roomId, int amenityId)
         {
-            var removeAmentity = await _context.RoomAmenities.FirstOrDefaultAsync(x => x.RoomId == roomId && x.AmenitiesId == amenityId);
+            var removeAmentity = await _context.RoomAmenities.FirstOrDefaultAsync(x => x.RoomId == roomId && x.AmenityId == amenityId);
             _context.Entry(removeAmentity).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
 
-        public async Task<RoomDTO> Create(NewRoomDTO newRoomDTO)
+        public async Task<Room> Create(NewRoomDTO newRoomDTO)
         {
             //_context.Entry(room).State = EntityState.Added;
 
@@ -54,7 +54,7 @@ namespace Async_Inn_Management_System.Models.Servieces
             await _context.SaveChangesAsync();
            
             RoomDTO roomDto = await GetRoom(newRoom.ID);
-            return roomDto;
+            return newRoom;
         }
 
         public async Task Delete(int id)

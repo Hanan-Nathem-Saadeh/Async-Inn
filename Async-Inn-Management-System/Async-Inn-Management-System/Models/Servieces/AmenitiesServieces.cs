@@ -54,13 +54,7 @@ namespace Async_Inn_Management_System.Models.Servieces
                  Name = Amenity.Amenity_Name
              }).ToListAsync ();
         }
-        public async Task<Amenity> GetAmentityByName(string Name)
-        {
-            return await _context.Amenities
-                                .Include(e => e.RoomAmenity)
-                                .ThenInclude(s => s.Room)
-                                .FirstOrDefaultAsync(x => x.Amenity_Name == Name);
-        }
+    
 
         public async Task<AmenityDTO> GetAmenity(int id)
         {
