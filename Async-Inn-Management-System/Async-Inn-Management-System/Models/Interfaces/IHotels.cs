@@ -7,10 +7,10 @@ namespace Async_Inn_Management_System.Models.Interfaces
 {
     public interface IHotels
     {
-        Task<HotelDTO> Create(HotelDTO hotel);
+        Task<Hotel> Create(Hotel hotel);
         Task<List<HotelDTO>> GetHotels();
         Task<HotelDTO> GetHotel(int id);
-        Task<HotelDTO> UpdateHotel(int id, HotelDTO hotel);
+        Task<Hotel> UpdateHotel(int id, Hotel hotel);
         Task Delete(int id);
     }
 }

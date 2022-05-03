@@ -7,7 +7,7 @@ namespace Async_Inn_Management_System.Models.Interfaces
 {
     public interface IRooms
     {
-        Task<RoomDTO> Create(NewRoomDTO newRoomDTO);
+        Task<Room> Create(NewRoomDTO newRoomDTO);
         Task<List<RoomDTO>> GetRooms();
         Task<RoomDTO> GetRoom(int id);
         Task<RoomDTO> UpdateRoom(int id, RoomDTO newroomDTO);

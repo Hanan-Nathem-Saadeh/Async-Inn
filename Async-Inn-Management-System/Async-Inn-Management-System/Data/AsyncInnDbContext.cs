@@ -35,7 +35,7 @@ namespace Async_Inn_Management_System.Data
                 new Amenity { ID = 3, Amenity_Name = "coffee maker" }
                 );
             modelBuilder.Entity<RoomAmenities>().HasKey(
-              RoomAmenities => new { RoomAmenities.RoomId , RoomAmenities.AmenitiesId}
+              RoomAmenities => new { RoomAmenities.RoomId , RoomAmenities.AmenityId}
                );
             modelBuilder.Entity<HotelRoom>().HasKey(
            HotelRoom => new { HotelRoom.RoomNumber, HotelRoom.HotelID }
