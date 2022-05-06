@@ -5,6 +5,7 @@ using Async_Inn_Management_System.Models.Servieces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,11 @@ namespace Async_Inn_Management_System
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //        .AddEntityFrameworkStores<AsyncInnDbContext>();
+
+
+
             services.AddDbContext<AsyncInnDbContext>(options =>
             {
 
@@ -55,6 +61,7 @@ namespace Async_Inn_Management_System
             }
 
             app.UseRouting();
+           //app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
