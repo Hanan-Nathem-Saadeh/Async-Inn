@@ -1,10 +1,12 @@
 ﻿using Async_Inn_Management_System.HotelModels;
 using Async_Inn_Management_System.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Async_Inn_Management_System.Data
 {
     public class AsyncInnDbContext : DbContext
+
     {
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -18,6 +20,7 @@ namespace Async_Inn_Management_System.Data
         //seeding
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Hotel>().HasData(
 
                 new Hotel { ID = 1, Hotel_Name = "Hanan Hotel", Hotel_Street_Address="One Street", Hotel_City="Amman", Hotel_State="Amman", Hotel_Country="Jordan", Hotel_Phone="0781234567" },
