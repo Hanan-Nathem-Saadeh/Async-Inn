@@ -192,5 +192,26 @@ Create DTOs that will be accepted and returned to the user:
     }
 
 ```
+# Lab 18 (Identity)
+
+In this lab we did : 
+* Building from our Async Inn API, integrate identity by completing the following:
+   - Integrate the Identity Framework into our API
+   - Confirm that we can register a user successfully in the database
+   - Confirm that we can login with the credentials of an existing user
+#### Integration Steps
+
+- Install Dependency: Identity Framework
+- Create a new user model, inheriting from IdentityUser
+- Add that model to your DbContext
+- Migrate the data, to create all of the Identity tables
+- Create related DTO’s for login, register, user for use in services and controllers
+- Create an IUser Interface to handle Authentication() and Register()
+- Add the IUser service to your services configuration
+- Add an empty controller and add the /register and /signin routes, using your new service
+
+
+
+
 
 

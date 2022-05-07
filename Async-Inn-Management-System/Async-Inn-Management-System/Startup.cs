@@ -1,5 +1,6 @@
 using Async_Inn_Management_System.Controllers;
 using Async_Inn_Management_System.Data;
+using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
 using Async_Inn_Management_System.Models.Servieces;
 using Microsoft.AspNetCore.Builder;
@@ -29,8 +30,15 @@ namespace Async_Inn_Management_System
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-            //        .AddEntityFrameworkStores<AsyncInnDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                options =>
+                {
+                    //options.Password.RequireDigit = false; // Adding digits to the password is not mandatory
+                    options.User.RequireUniqueEmail = true; // make sure the email is unique
+
+                }
+                    )
+                .AddEntityFrameworkStores<AsyncInnDbContext>();
 
 
 
@@ -45,6 +53,7 @@ namespace Async_Inn_Management_System
             services.AddTransient<IHotels, HotelServieces>();
             services.AddTransient<IRooms,RoomsServieces>();
             services.AddTransient<IHotelRoom, HotelRoomService>();
+            services.AddTransient<IUserService, IdentityUserService>();
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(options =>
                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
