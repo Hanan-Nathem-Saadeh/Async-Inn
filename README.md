@@ -210,6 +210,13 @@ In this lab we did :
 - Add the IUser service to your services configuration
 - Add an empty controller and add the /register and /signin routes, using your new service
 
+ Register Successfully 
+ 
+ ![](./img/register.png)
+ 
+ Login successfully
+ 
+ ![](./img/login.png)
 
 
 
