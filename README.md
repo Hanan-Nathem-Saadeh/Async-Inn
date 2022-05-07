@@ -208,7 +208,7 @@ This lab is two parts
            public void ConfigureServices()
  
 {
-  ...
+
    services.AddSwaggerGen(options =>
  
    {
@@ -225,25 +225,24 @@ This lab is two parts
    });
 
 }
-```
+
  
     - In Startup.cs, add this to Configure()
- 
-```
+
 
 app.UseSwagger( options => {
  options.RouteTemplate = "/api/{documentName}/swagger.json";
 });
-```
+
  
 and
  
-```
+
 app.UseSwaggerUI( options => {
   options.SwaggerEndpoint("/api/v1/swagger.json", "Student Demo");
   options.RoutePrefix = "docs";
 });
-```
+
 
 # Lab 18 (Identity)
 
