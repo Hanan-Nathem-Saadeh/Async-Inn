@@ -203,8 +203,6 @@ This lab is two parts
            - Install Dependency: Swashbuckle.AspnetCore
            -  in startup :
 
-           ```
-
            public void ConfigureServices()
  
 {
@@ -222,6 +220,7 @@ This lab is two parts
        Version = "v1",
  
      });
+ 
    });
 
 }
@@ -231,7 +230,9 @@ This lab is two parts
 
 
 app.UseSwagger( options => {
+ 
  options.RouteTemplate = "/api/{documentName}/swagger.json";
+ 
 });
 
  
@@ -239,8 +240,11 @@ and
  
 
 app.UseSwaggerUI( options => {
+ 
   options.SwaggerEndpoint("/api/v1/swagger.json", "Student Demo");
+ 
   options.RoutePrefix = "docs";
+ 
 });
 
 
