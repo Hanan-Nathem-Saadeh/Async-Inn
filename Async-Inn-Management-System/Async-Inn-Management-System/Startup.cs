@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,14 @@ namespace Async_Inn_Management_System
             services.AddControllers().AddNewtonsoftJson(options =>
                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
            );
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("V1", new OpenApiInfo()
+                {
+                    Title = "Async-Inn-Manegment-System",
+                    Version = "V1",
+                });
+            });
         }
 
 
@@ -70,7 +79,17 @@ namespace Async_Inn_Management_System
             }
 
             app.UseRouting();
-           //app.UseAuthentication();
+            app.UseSwagger(opt =>
+            {
+                opt.RouteTemplate = "/api/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(opt =>
+            {
+                opt.SwaggerEndpoint("/api/V1/swagger.json", "Async-Inn-Manegment-System");
+                opt.RoutePrefix = "";
+            });
+            //app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
