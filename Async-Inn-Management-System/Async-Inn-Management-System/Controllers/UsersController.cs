@@ -40,7 +40,7 @@ namespace Async_Inn_Management_System.Controllers
     }
 
 }
-        [HttpPost("Login")]
+        [HttpGet("Login")]
         public async Task<ActionResult<UserDto>>LogIn([FromBody] LogInDto login)
 
         {

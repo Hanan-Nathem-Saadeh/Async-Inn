@@ -192,6 +192,49 @@ Create DTOs that will be accepted and returned to the user:
     }
 
 ```
+
+# Lab 17 (Swagger and unit test)
+
+![](./img/Swagger.png)
+
+This lab is two parts
+1- Swagger :
+    -  create live documentation using Swagger definitions.
+           - Install Dependency: Swashbuckle.AspnetCore
+           -  in startup :
+
+           ```
+
+           public void ConfigureServices()
+{
+  ...
+   services.AddSwaggerGen(options =>
+   {
+     // Make sure get the "using Statement"
+     options.SwaggerDoc("v1", new OpenApiInfo()
+     {
+       Title = "School Demo",
+       Version = "v1",
+     });
+   });
+
+}
+```
+    - In Startup.cs, add this to Configure()
+```
+
+app.UseSwagger( options => {
+ options.RouteTemplate = "/api/{documentName}/swagger.json";
+});
+```       
+and
+```
+app.UseSwaggerUI( options => {
+  options.SwaggerEndpoint("/api/v1/swagger.json", "Student Demo");
+  options.RoutePrefix = "docs";
+});
+```
+
 # Lab 18 (Identity)
 
 In this lab we did : 
