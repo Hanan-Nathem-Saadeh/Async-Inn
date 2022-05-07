@@ -206,28 +206,38 @@ This lab is two parts
            ```
 
            public void ConfigureServices()
+ 
 {
   ...
    services.AddSwaggerGen(options =>
+ 
    {
      // Make sure get the "using Statement"
+ 
      options.SwaggerDoc("v1", new OpenApiInfo()
+ 
      {
        Title = "School Demo",
+ 
        Version = "v1",
+ 
      });
    });
 
 }
 ```
+ 
     - In Startup.cs, add this to Configure()
+ 
 ```
 
 app.UseSwagger( options => {
  options.RouteTemplate = "/api/{documentName}/swagger.json";
 });
-```       
+```
+ 
 and
+ 
 ```
 app.UseSwaggerUI( options => {
   options.SwaggerEndpoint("/api/v1/swagger.json", "Student Demo");
