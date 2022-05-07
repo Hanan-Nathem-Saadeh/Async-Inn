@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Async_Inn_Management_System.Data
 {
-    public class AsyncInnDbContext : DbContext
+    public class AsyncInnDbContext : IdentityDbContext<ApplicationUser>
 
     {
         public DbSet<Hotel> Hotels { get; set; }
@@ -20,7 +20,7 @@ namespace Async_Inn_Management_System.Data
         //seeding
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+          base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Hotel>().HasData(
 
                 new Hotel { ID = 1, Hotel_Name = "Hanan Hotel", Hotel_Street_Address="One Street", Hotel_City="Amman", Hotel_State="Amman", Hotel_Country="Jordan", Hotel_Phone="0781234567" },
