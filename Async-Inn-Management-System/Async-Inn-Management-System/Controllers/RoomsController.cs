@@ -56,9 +56,9 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(NewRoomDTO newRoomDTO)
+        public async Task<ActionResult<Room>> PostRoom(RoomDTO newRoomDTO)
         {
-            Room newRoom = await _Room.Create(newRoomDTO);
+            RoomDTO newRoom = await _Room.Create(newRoomDTO);
             return Ok(newRoom);
         }
 
