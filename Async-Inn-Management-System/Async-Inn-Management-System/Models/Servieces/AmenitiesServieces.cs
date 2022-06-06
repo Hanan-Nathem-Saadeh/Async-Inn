@@ -1,5 +1,4 @@
-﻿
-using Async_Inn_Management_System.Data;
+﻿using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,9 +17,9 @@ namespace Async_Inn_Management_System.Models.Servieces
         {
             _context = context;
         }
-       
 
-        public async Task<AmenityDTO> Create(NewAmenityDTO NewmAmentityDTO)
+
+        public async Task<AmenityDTO> Create(AmenityDTO NewmAmentityDTO)
         {
             Amenity newAmenity = new Amenity
             {
@@ -52,9 +51,9 @@ namespace Async_Inn_Management_System.Models.Servieces
              {
                  ID = Amenity.ID,
                  Name = Amenity.Amenity_Name
-             }).ToListAsync ();
+             }).ToListAsync();
         }
-    
+
 
         public async Task<AmenityDTO> GetAmenity(int id)
         {
@@ -67,7 +66,7 @@ namespace Async_Inn_Management_System.Models.Servieces
                 {
                     ID = Amenity.ID,
                     Name = Amenity.Amenity_Name
-                   
+
 
                 }).FirstOrDefaultAsync(s => s.ID == id);
 

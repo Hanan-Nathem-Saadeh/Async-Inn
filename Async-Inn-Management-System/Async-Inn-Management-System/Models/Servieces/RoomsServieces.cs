@@ -13,11 +13,11 @@ namespace Async_Inn_Management_System.Models.Servieces
     public class RoomsServieces : IRooms
     {
         private readonly AsyncInnDbContext _context;
-        private readonly IAmentities _amentity;
-        public RoomsServieces(AsyncInnDbContext context,IAmentities amentity )
+       // private readonly IAmentities _amentity;
+        public RoomsServieces(AsyncInnDbContext context )
         {
             _context = context;
-            _amentity = amentity;
+            //_amentity = amentity;
         }
 
         public async Task AddAmenityToRoom(int roomId, int amenityId)
@@ -37,7 +37,7 @@ namespace Async_Inn_Management_System.Models.Servieces
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Room> Create(NewRoomDTO newRoomDTO)
+        public async Task<RoomDTO> Create(RoomDTO newRoomDTO)
         {
             //_context.Entry(room).State = EntityState.Added;
 
@@ -54,7 +54,7 @@ namespace Async_Inn_Management_System.Models.Servieces
             await _context.SaveChangesAsync();
            
             RoomDTO roomDto = await GetRoom(newRoom.ID);
-            return newRoom;
+            return roomDto;
         }
 
         public async Task Delete(int id)
@@ -77,12 +77,12 @@ namespace Async_Inn_Management_System.Models.Servieces
                    ID = Room.ID,
                    Name = Room.Room_Name,
                     Layout = Room.Room_Layout,
-                    // Amenities = Room.RoomAmenity
-                    //.Select(x => new AmenityDTO
-                    //{
-                    //    ID = x.Amenity.ID,
-                    //    Name = x.Amenity.Amenity_Name
-                    //}).ToList()
+                   Amenities = Room.RoomAmenity
+                    .Select(x => new AmenityDTO
+                    {
+                        ID = x.Amenity.ID,
+                        Name = x.Amenity.Amenity_Name
+                    }).ToList()
                }).FirstOrDefaultAsync(s => s.ID == id);
         }
 

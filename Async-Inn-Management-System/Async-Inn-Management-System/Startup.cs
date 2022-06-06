@@ -89,7 +89,7 @@ namespace Async_Inn_Management_System
                 opt.SwaggerEndpoint("/api/V1/swagger.json", "Async-Inn-Manegment-System");
                 opt.RoutePrefix = "";
             });
-            //app.UseAuthentication();
+           app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

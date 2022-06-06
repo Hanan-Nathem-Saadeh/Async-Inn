@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Async_Inn_Management_System.Models.Servieces
-    
+
 {
     public class HotelRoomService : IHotelRoom
     {
@@ -16,7 +16,7 @@ namespace Async_Inn_Management_System.Models.Servieces
         {
             _context = context;
         }
-        public async Task<HotelRoomDTO> Create(int HoteID ,HotelRoomDTO hotelRoomDTO)
+        public async Task<HotelRoomDTO> Create(int HoteID, HotelRoomDTO hotelRoomDTO)
         {
             HotelRoom newHotelRoom = new HotelRoom
             {
@@ -41,7 +41,8 @@ namespace Async_Inn_Management_System.Models.Servieces
                 PetFriendly = x.PetFriendly,
                 RoomID = x.RoomID,
                 Room = new RoomDTO()
-                { ID = x.Room.ID,
+                {
+                    ID = x.Room.ID,
                     Name = x.Room.Room_Name,
                     Layout = x.Room.Room_Layout,
                     Amenities = x.Room.RoomAmenity
@@ -52,16 +53,16 @@ namespace Async_Inn_Management_System.Models.Servieces
                     }).ToList()
                 }
             }).FirstOrDefaultAsync(x => x.HotelID == hotelId && x.RoomNumber == roomNumber);
-       
-        //return await _context.HotelRoom.Include(x => x.Room)
-                //                                .ThenInclude(c => c.RoomAmenity)
-                //                                .Include(x => x.Hotel)
-                //                                .ThenInclude(e => e.HotelRoom)
-                //                                .FirstOrDefaultAsync(x => x.HotelID == HotelId && x.RoomNumber == RoomNum); 
+
+            //return await _context.HotelRoom.Include(x => x.Room)
+            //                                .ThenInclude(c => c.RoomAmenity)
+            //                                .Include(x => x.Hotel)
+            //                                .ThenInclude(e => e.HotelRoom)
+            //                                .FirstOrDefaultAsync(x => x.HotelID == HotelId && x.RoomNumber == RoomNum); 
         }
-            
-                
-           
+
+
+
         public async Task Delete(int HotelId, int RoomNum)
         {
             HotelRoom hotelRoom = await _context.HotelRoom.FindAsync(HotelId, RoomNum);
@@ -84,9 +85,9 @@ namespace Async_Inn_Management_System.Models.Servieces
                     Layout = x.Room.Room_Layout,
                     Amenities = x.Room.RoomAmenity
                   .Select(ra => new AmenityDTO()
-                   {
-                   ID = ra.Amenity.ID,
-                   Name = ra.Amenity.Amenity_Name
+                  {
+                      ID = ra.Amenity.ID,
+                      Name = ra.Amenity.Amenity_Name
                   })
                    .ToList()
                 }

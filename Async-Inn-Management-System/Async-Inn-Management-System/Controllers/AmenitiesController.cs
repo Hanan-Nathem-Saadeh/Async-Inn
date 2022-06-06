@@ -58,7 +58,7 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AmenityDTO>> PostAmenity(NewAmenityDTO amenity)
+        public async Task<ActionResult<AmenityDTO>> PostAmenity(AmenityDTO amenity)
         {
             AmenityDTO newAmentity = await _amentity.Create(amenity);
             return Ok(newAmentity);
