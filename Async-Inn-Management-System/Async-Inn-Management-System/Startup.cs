@@ -3,6 +3,7 @@ using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
 using Async_Inn_Management_System.Models.Servieces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -67,6 +68,18 @@ namespace Async_Inn_Management_System
                     Version = "V1",
                 });
             });
+            services.AddScoped<JwtTokenService>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+   .AddJwtBearer(options =>
+   {
+       // Tell the authenticaion scheme "how/where" to validate the token + secret
+       options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration);
+   });
         }
 
 
@@ -79,6 +92,8 @@ namespace Async_Inn_Management_System
             }
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseSwagger(opt =>
             {
                 opt.RouteTemplate = "/api/{documentName}/swagger.json";
@@ -89,8 +104,8 @@ namespace Async_Inn_Management_System
                 opt.SwaggerEndpoint("/api/V1/swagger.json", "Async-Inn-Manegment-System");
                 opt.RoutePrefix = "";
             });
-           app.UseAuthentication();
-
+          
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

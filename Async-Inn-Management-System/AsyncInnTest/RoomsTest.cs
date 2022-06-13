@@ -12,26 +12,40 @@ namespace AsyncInnTest
 {
     public class RoomsTest : Mock
     {
-        [Fact]
-        
-            public async void  CreateAndSaveTestAmenity()
-            {
-            AmenityDTO amenity = new AmenityDTO { Name = "TestAmenityName" };
-            var repository = new AmenitiesServieces(_db);
-            amenity = await repository.Create(amenity);
-             
-                Assert.NotEqual(0, amenity.ID); // Sanity check
-                
-            }
+
         [Fact]
         public async void CreateAndSaveTestRoom()
         {
-            RoomDTO room = new RoomDTO { Name = "testRoomName", Layout = "testRoomLayout" };
+            RoomDTO room = new RoomDTO {ID=1, Name = "testRoomName", Layout = "testRoomLayout" };
             var repository = new RoomsServieces(_db);
             room = await repository.Create(room);
 
-            Assert.NotEqual(0, room.ID); // Sanity check
+            Assert.NotEqual(0, room.ID);
 
+        }
+        [Fact]
+        public async void GetRooms()
+        {
+            RoomDTO room = new RoomDTO { ID = 1, Name = "testRoomName", Layout = "testRoomLayout" };
+            RoomDTO room2 = new RoomDTO { ID = 2, Name = "testRoomName2", Layout = "testRoomLayout2" };
+            var repository = new RoomsServieces(_db);
+            room = await repository.Create(room);
+            room = await repository.Create(room2);
+            List<RoomDTO> GetRoomsList = await repository.GetRooms();
+
+            Assert.Equal(5, GetRoomsList.Count);
+        }
+        [Fact]
+        public async void GetRoomById()
+        {
+            RoomDTO room = new RoomDTO { ID = 4, Name = "testRoomName", Layout = "testRoomLayout" };
+            
+            var repository = new RoomsServieces(_db);
+            await repository.Create(room);
+           
+            var GetRoom = await repository.GetRoom(4);
+
+            Assert.Equal("testRoomName", GetRoom.Name);
         }
         [Fact]
         public async void RemoveTestRoom()
@@ -39,34 +53,20 @@ namespace AsyncInnTest
             RoomDTO room = new RoomDTO { Name = "testRoomName", Layout = "testRoomLayout" };
             var repository = new RoomsServieces(_db);
             room = await repository.Create(room);
-            int x= room.ID;
-            Assert.NotEqual(0, room.ID); // Sanity check
-            await repository.Delete(room.ID);
-            Assert.NotEqual(x,room.ID); // Sanity check
+            int x = room.ID;
+            Assert.Equal(4, room.ID);
+            List<RoomDTO> mylist = await repository.GetRooms();
+            Assert.Equal(4,mylist.Count);
+          await repository.Delete(room.ID);
+            List<RoomDTO> mylist2 = await repository.GetRooms();
+            Assert.Equal(3, mylist2.Count);
 
 
         }
-        //  // Arrange
-        //  var amenity = await CreateAndSaveTestAmenity();
-        //  var room = await CreateAndSaveTestRoom();
-
-        //  var repository = new RoomsServieces(_db);
-
-        //  // Act
-        //await repository.AddAmenityToRoom(room.ID,amenity.ID);
-
-        //  // Assert
-        //  var actualRoom = await repository.GetRoom(room.ID);
-
-        //  Assert.Contains(actualRoom.Amenities, e => e.ID == room.ID);
-
-        //  //// Act
-        //  await repository.RemoveAmentityFromRoom(room.ID, amenity.ID);
-
-        //  //// Assert
-        // actualRoom = await repository.GetRoom(room.ID);
-        //  Assert.DoesNotContain(actualRoom.Amenities, e => e.ID == room.ID);
 
     }
-}
+  
+
+    }
+
 
