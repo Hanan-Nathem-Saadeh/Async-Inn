@@ -1,6 +1,7 @@
 ﻿using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.DTO;
 using Async_Inn_Management_System.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -40,28 +41,32 @@ namespace Async_Inn_Management_System.Controllers
     }
 
 }
-        [HttpGet("Login")]
-        public async Task<ActionResult<UserDto>>LogIn([FromBody] LogInDto login)
-
+        [HttpPost("Login")]
+        public async Task<ActionResult<UserDto>> Login(UserDto user)
         {
-            try
+            UserDto userDto = await _UserService.Authenticate(user.Username, user.Password);
+            if (userDto != null)
             {
-               await _UserService.Authenticate(login.Username, login.Password);
-                if (ModelState.IsValid)
-                {
-                    return Ok("Welcome To your Page :)");
+                return Ok(userDto);
 
-                }
-                else
-                {
-                    return BadRequest("Please Regester First...");
-                }
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return BadRequest("user and password not matching");
+
+
+        }
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<ActionResult<UserDto>> Me()
+        {
+            // Following the [Authorize] phase, this.User will be ... you.
+            // Put a breakpoint here and inspect to see what's passed to our getUser method
+            return await _UserService.GetUser(this.User);
         }
 
-            }
+
+
+
+
+
+    }
 }
