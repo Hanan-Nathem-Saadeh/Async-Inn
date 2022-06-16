@@ -42,6 +42,7 @@ namespace Async_Inn_Management_System.Controllers
 
 }
         [HttpPost("Login")]
+        [AllowAnonymous]
         public async Task<ActionResult<UserDto>> Login(UserDto user)
         {
             UserDto userDto = await _UserService.Authenticate(user.Username, user.Password);

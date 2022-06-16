@@ -1,7 +1,9 @@
 ﻿using Async_Inn_Management_System.HotelModels;
 using Async_Inn_Management_System.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Async_Inn_Management_System.Data
 {
@@ -43,7 +45,22 @@ namespace Async_Inn_Management_System.Data
             modelBuilder.Entity<HotelRoom>().HasKey(
            HotelRoom => new { HotelRoom.RoomNumber, HotelRoom.HotelID }
             );
-      
+            SeedRole(modelBuilder, "DistrictManager");
+            SeedRole(modelBuilder, "PropertyManager");
+            SeedRole(modelBuilder, "Agent");
         }
+        private void SeedRole(ModelBuilder modelBuilder, string roleName)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+            modelBuilder.Entity<IdentityRole>().HasData(role);
+        }
+
     }
-}
+    }
+
