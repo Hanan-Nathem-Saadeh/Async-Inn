@@ -9,11 +9,13 @@ using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
 using Async_Inn_Management_System.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Async_Inn_Management_System.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "DistrictManager")]
     public class AmenitiesController : ControllerBase
     {
         private readonly IAmentities _amentity;
@@ -25,6 +27,7 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Amenities
         [HttpGet]
+         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
             var amenities = await _amentity.GetAmenities();
@@ -33,6 +36,7 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
             AmenityDTO amenity = await _amentity.GetAmenity(id);

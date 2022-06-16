@@ -10,11 +10,13 @@ using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
 using Async_Inn_Management_System.Models.DTO;
 using static Async_Inn_Management_System.Models.DTO.RoomDTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Async_Inn_Management_System.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "DistrictManager")]
     public class RoomsController : ControllerBase
     {
         private readonly IRooms _Room;
@@ -26,6 +28,8 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Rooms
         [HttpGet]
+        [AllowAnonymous]
+        // [Authorize(Roles = "PropertyManager, DistrictManager")]
         public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             var room = await _Room.GetRooms();
@@ -34,6 +38,8 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
+        // [Authorize(Roles = "PropertyManager, DistrictManager")]
+        [AllowAnonymous]
         public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
             RoomDTO room = await _Room.GetRoom(id);
@@ -43,6 +49,7 @@ namespace Async_Inn_Management_System.Controllers
         // PUT: api/Rooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "PropertyManager, DistrictManager")]
         public async Task<IActionResult> PutRoom(int id, RoomDTO newroomDTO)
         {
             if (id != newroomDTO.ID)
@@ -75,6 +82,7 @@ namespace Async_Inn_Management_System.Controllers
         // Delete Amentity
         //api/Rooms/5/1
         [HttpDelete("{roomId}/{amenityId}")]
+        [Authorize(Roles = "PropertyManager, DistrictManager , Agent")]
         public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
         {
             await _Room.RemoveAmentityFromRoom(roomId, amenityId);
@@ -83,6 +91,7 @@ namespace Async_Inn_Management_System.Controllers
         //Add Amentity to room
         //api/Rooms/3/2
         [HttpPost("{roomId}/{amenityId}")]
+        [Authorize(Roles = "PropertyManager, DistrictManager , Agent")]
         public async Task<IActionResult> AddAmantityToRoom(int roomId, int amenityId)
         {
             await _Room.AddAmenityToRoom(roomId, amenityId);

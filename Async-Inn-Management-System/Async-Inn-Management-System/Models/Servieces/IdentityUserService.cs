@@ -2,6 +2,7 @@
 using Async_Inn_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -52,11 +53,19 @@ namespace Async_Inn_Management_System.Models.Servieces
 
             if (result.Succeeded)
             {
-                UserDto userDto = new UserDto
+                List<string> Roles = new List<string>();
+                Roles.Add("DistrictManager");
+                Roles.Add("PropertyManager");
+                Roles.Add("Agent");
+
+                await _UserManager.AddToRolesAsync(user, Roles);
+
+                var userDto = new UserDto
                 {
-                    Id = user.Id,
                     Username = user.UserName,
-                    Token = await tokenService.GetToken(user, System.TimeSpan.FromMinutes(15))
+                    Id = user.Id,
+
+                    Token = await tokenService.GetToken(user, System.TimeSpan.FromDays(15))
 
                 };
                 return userDto;

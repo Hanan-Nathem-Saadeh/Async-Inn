@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/async-inn-management-systemdbserver/databases/Async-Inn-Management-System_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DefaultConnection"
+    },
+    "apis1": {
+      "apiEndpoint": "https://async-inn-management-systemapi-v2.azure-api.net/",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/Async-Inn-Management-Systemapi-V2/apis/Async-Inn-Management-System",
+      "type": "apis.azure"
+    }
+  }
+}
